@@ -1,9 +1,20 @@
+/*
+this part imported for all elements
+set margin and padding to zero
+ */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+
+/*
+set style of body of html
+set font from google fonts imported on html
+set background image with type to resize
+justify all items to center for centralizer box
+ */
 body {
     font-family: 'Libre Franklin', sans-serif;
     background-image: url('../img/bg.jpg');
@@ -15,7 +26,11 @@ body {
     align-items: center;
 }
 
-h1 {
+
+/*
+make h2 and h5 bold
+ */
+h2 {
     font-weight: bold;
     margin: 0 0 1rem;
 }
@@ -25,6 +40,9 @@ h5 {
     margin: 0 0 1rem;
 }
 
+/*
+set font size and space of lines of p tags
+ */
 p {
     font-size: 14px;
     font-weight: 100;
@@ -33,18 +51,19 @@ p {
     margin: 20px 0 30px;
 }
 
+
+/*
+set font size of span tag
+ */
 span {
     font-size: 12px;
 }
 
-a {
-    color: #333;
-    font-size: 14px;
-    text-decoration: none;
-    margin: 15px 0;
-}
-
-
+/*
+create style for buttons
+set gradient and align of text into them and uppercase content
+and make size of them larger and set animation for click on them
+ */
 .btn-grad {
     background-image: linear-gradient(to right, #6441A5 0%, #2a0845 51%, #6441A5 100%)
 }
@@ -69,6 +88,9 @@ a {
 }
 
 
+/*
+set forms flex display and align them center
+ */
 form {
     display: flex;
     align-items: center;
@@ -79,6 +101,11 @@ form {
     text-align: center;
 }
 
+
+/*
+set padding and margin for input box
+and low opacity white background
+ */
 input {
     background: rgb(255, 255, 255, 0.2);
     border-radius: 5%;
@@ -88,6 +115,11 @@ input {
     width: 100%;
 }
 
+
+/*
+set padding and margin for container of left and right
+and low opacity white background
+ */
 .container {
     background-color: rgb(255, 255, 255, 0.3);
     border-radius: 10px;
@@ -99,7 +131,7 @@ input {
     min-height: 480px;
 }
 
-/*  */
+/* set common vars of each container left and right */
 
 .sub-container {
     display: flex;
@@ -112,38 +144,27 @@ input {
     position: absolute;
     top: 0;
     transition: all 0.6s ease-in-out;
+    width: 50%;
 }
 
+
+/*
+set different vars to show in right and left
+*/
 .left-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
     left: 0;
-    width: 50%;
     z-index: 2;
 }
 
 .right-container {
     left: 50%;
-    width: 50%;
     z-index: 1;
 }
 
-@keyframes show {
-    0%,
-    49.99% {
-        opacity: 0;
-        z-index: 1;
-    }
 
-    50%,
-    100% {
-        opacity: 1;
-        z-index: 5;
-    }
-}
-
+/*
+make a box for radios
+*/
 .radiogroup {
     padding: 5px 0;
     justify-items: center;
@@ -168,12 +189,18 @@ input {
     cursor: pointer;
 }
 
+/*
+make text not fully showed and transparent to select them show with full opacity
+*/
 .text {
     margin-left: 16px;
     opacity: .6;
     transition: opacity .2s linear, transform .2s ease-out;
 }
 
+/*
+set size and shadow of each box
+*/
 .indicator {
     position: relative;
     border-radius: 80%;
@@ -184,6 +211,9 @@ input {
     overflow: hidden;
 }
 
+/*
+set shadows color in two state for create animation
+*/
 .indicator::before,
 .indicator::after {
     content: '';
@@ -207,21 +237,35 @@ input {
     transition: opacity .25s ease-in-out, transform .25s ease-in-out;
 }
 
-
+/*
+add animation
+indicator set and onset shadows have reverse vals make an animation
+ */
 .state:checked ~ .label .indicator::after {
     transform: scale3d(.975, .975, 1) translate3d(0, 10%, 0);
     opacity: 0;
 }
 
+
+/*
+set color of buttons when selected
+*/
 .state:checked ~ .label .indicator::before {
     background-color: #2a0845;
 }
 
+/*
+move text when select it
+*/
 .state:focus ~ .label .text {
     transform: translate3d(3px, 0, 0);
     opacity: 1;
 }
 
+
+/*
+make text with great opacity when selected
+*/
 .label:hover .text {
     opacity: 1;
 }

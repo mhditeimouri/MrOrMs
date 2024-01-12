@@ -11,40 +11,26 @@ const localStorage = window.localStorage
 const loading = document.getElementById("Loading")
 const error_div = document.getElementById("ErrorDiv")
 
-name.addEventListener("keydown", empty_fields);
 
+// Hide an element
 function hide(element) {
     element.style.visibility = "hidden";
 }
 
+// Show an element
 function show(element) {
     element.style.visibility = "visible";
 }
 
-function empty_fields(event) {
-    gender.innerHTML = "";
-    hide(accuracy);
-    hide(clear);
-    hide(save);
-    accuracy.innerHTML = "";
-    source.innerHTML = "";
-}
-
-name.addEventListener("keydown", function (event) {
-    let key = event.key;
-    let regex = /[^a-zA-Z\s]+/;
-    if (regex.test(key) && key !== "Backspace" && key !== "Delete" && key !== "ArrowLeft" && key !== "ArrowRight") {
-        console.log(key);
-        event.preventDefault();
-    }
-})
-
+// Show errors
 function showError(error) {
     show(error_div);
-    error_div.innerHTML = error;
+    error_div.innerHTML = "<h5>" + error + "</h5>";
 }
 
-function get_result() {
+
+// Send request to api and set the result
+function show_get_api_result() {
     fetch("https://api.genderize.io/?name=" + name.value).then((response) => {
         if (!response.ok) {
             throw new Error("Network response was not ok, " + response.status);
@@ -68,6 +54,32 @@ function get_result() {
     })
 }
 
+
+// Clear html parts
+function empty_fields(event) {
+    gender.innerHTML = "";
+    hide(accuracy);
+    hide(clear);
+    hide(save);
+    accuracy.innerHTML = "";
+    source.innerHTML = "";
+}
+
+// Clear all parts when select name and try to edit
+name.addEventListener("keydown", empty_fields);
+
+// Restrict input of name
+name.addEventListener("keydown", function (event) {
+    let key = event.key;
+    let regex = /[^a-zA-Z\s]+/;
+    if (regex.test(key) && key !== "Backspace" && key !== "Delete" && key !== "ArrowLeft" && key !== "ArrowRight") {
+        console.log(key);
+        event.preventDefault();
+    }
+})
+
+
+// Submit name and handel different states
 submit.addEventListener("click", function (event) {
     hide(error_div);
     hide(save);
@@ -81,11 +93,13 @@ submit.addEventListener("click", function (event) {
         source.innerHTML = "Saved result";
         show(clear);
     } else {
-        get_result();
+        show_get_api_result();
     }
     event.preventDefault();
 });
 
+
+// Save value of selected gender
 save.addEventListener("click", function (event) {
     let value;
     if (name.value === "") {
@@ -111,12 +125,9 @@ save.addEventListener("click", function (event) {
     event.preventDefault();
 })
 
+
+// Clear saved gender
 clear.addEventListener("click", function (event) {
     localStorage.removeItem(name.value);
     source.innerHTML = "Result removed";
 })
-
-error_div.addEventListener("click", function (event) {
-    hide(error_div);
-    event.stopPropagation();
-});
